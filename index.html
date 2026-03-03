@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orienta — Tu Agencia con Superpoderes de IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geom:wght@400;700&family=Unbounded:wght@800&family=Reddit+Sans:wght@300;400;500&family=Reddit+Sans+Condensed:wght@700&family=Stack+Sans+Notch:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --tc: #C4613A;
+  --dark: #1A1410;
+  --cream: #F2EDE6;
+  --white: #FFFFFF;
+  --border: #E5DDD5;
+  --text: #2C2418;
+  --muted: #7A6E65;
+  --max: 1240px;
+  --pad: clamp(1rem, 4vw, 2rem);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Reddit Sans', sans-serif; font-weight: 400; background: var(--cream); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 17px; }
+.headline { font-family: 'Unbounded', sans-serif; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+.accent { font-family: 'Stack Sans Notch', sans-serif; font-weight: 700; font-style: normal; text-transform: none; letter-spacing: 0.01em; color: var(--tc); }
+.label { font-family: 'Reddit Sans Condensed', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tc); }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+nav { position: sticky; top: 0; z-index: 100; background: rgba(242,237,230,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+.nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-mark { width: 32px; height: 32px; flex-shrink: 0; }
+.logo-word { font-family: 'Geom', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--text); letter-spacing: 0.04em; }
+.logo-word span { color: var(--tc); }
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 0.9rem; font-weight: 400; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--dark); color: var(--white); padding: 0.55rem 1.1rem; border-radius: 999px; font-size: 0.82rem; font-weight: 500; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+.btn-cta:hover { background: #2d2318; }
+.hero { padding: 0; overflow: hidden; background: var(--cream); }
+.hero-top { max-width: var(--max); margin: 0 auto; padding: 5rem var(--pad) 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--white); border: 1px solid var(--border); border-radius: 999px; padding: 0.3rem 0.85rem; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--tc); margin-bottom: 1.5rem; }
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--tc); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.5; transform:scale(.8); } }
+.hero-h1 { font-size: clamp(2.8rem,5vw,4rem); color: var(--text); margin-bottom: 1.5rem; }
+.hero-h1 em { font-family: 'Stack Sans Notch', sans-serif; font-weight: 700; font-style: normal; text-transform: none; color: var(--tc); letter-spacing: 0.01em; }
+.hero-right { padding-top: 1rem; }
+.hero-desc { font-size: 1.1rem; font-weight: 300; color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+.hero-btns { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--dark); color: var(--white); padding: 0.75rem 1.5rem; border-radius: 999px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: background 0.2s; }
+.btn-primary:hover { background: #2d2318; }
+.btn-ghost { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 400; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: border-color 0.2s, color 0.2s; }
+.btn-ghost:hover { color: var(--tc); border-color: var(--tc); }
+.hero-stats { background: var(--dark); padding: 3rem var(--pad) 5rem; }
+.hero-stats-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; align-items: stretch; }
+.stat-card { background: var(--cream); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 8px 28px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.25); }
+.stat-icon { font-size: 1.2rem; margin-bottom: 1rem; display: block; }
+.stat-num { font-family: 'Unbounded',sans-serif; font-weight: 800; font-size: clamp(2rem,3.5vw,2.8rem); color: var(--tc); line-height: 1; margin-bottom: .5rem; }
+.stat-label { font-size: .92rem; color: var(--text); font-weight: 300; line-height: 1.4; }
+.stat-sub { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-top: 1rem; }
+.stat-bar { position: absolute; bottom: 0; left: 2rem; right: 2rem; height: 2px; background: var(--tc); opacity: .4; border-radius: 0 0 16px 16px; }
+
+section { position: relative; }
+.section-header { margin-bottom: 3rem; }
+.section-header .label { margin-bottom: .75rem; display: block; }
+.section-title { font-size: clamp(1.8rem,3vw,2.5rem); color: var(--text); line-height: 1.15; }
+.section-title em { font-family: 'Stack Sans Notch', sans-serif; font-weight: 700; font-style: normal; text-transform: none; color: var(--tc); letter-spacing: 0.01em; }
+.section-sub { margin-top: .75rem; font-size: 1rem; color: var(--muted); font-weight: 300; max-width: 520px; }
+.problem { padding: 6rem 0; background: var(--cream); }
+.problem-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+.problem-row-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; margin-top: 1.5rem; max-width: calc(66.66% + .5rem); }
+.card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem; box-shadow: 0 4px 20px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04); }
+
+.card-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+.card-title { font-weight: 600; font-size: .95rem; color: var(--text); margin-bottom: .5rem; line-height: 1.3; }
+.card-desc { font-size: .92rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
+.how { background: var(--dark); padding: 6rem 0; }
+.how .section-title { color: var(--white); }
+.how .section-sub { color: rgba(255,255,255,.5); }
+.how-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 3.5rem; }
+.step { background: var(--cream); border: 1px solid rgba(255,255,255,.06); border-radius: 16px; padding: 2rem; box-shadow: 0 8px 28px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.25); }
+
+.step-num { font-family: 'Unbounded',sans-serif; font-weight: 800; font-size: 4rem; color: rgba(0,0,0,.08); line-height: 1; margin-bottom: 1rem; }
+.step-title { font-weight: 600; font-size: 1rem; color: var(--text); margin-bottom: .65rem; }
+.step-desc { font-size: .92rem; color: var(--muted); font-weight: 300; line-height: 1.65; }
+.step-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.25rem; }
+.tag { background: rgba(196,97,58,.08); border: 1px solid rgba(196,97,58,.25); color: var(--tc); font-size: .75rem; font-family: 'Reddit Sans Condensed',sans-serif; font-weight: 700; padding: .2rem .65rem; border-radius: 999px; letter-spacing: .02em; }
+.compound { background: var(--dark); padding: 0 0 6rem; border-top: 1px solid rgba(255,255,255,.06); }
+.compound-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+.compound-card { background: var(--cream); border: 1px solid rgba(255,255,255,.06); border-radius: 16px; padding: 2rem; box-shadow: 0 8px 28px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.25); }
+
+.compound-card .card-title { color: var(--text); font-size: 1rem; }
+.compound-card .card-desc { color: var(--muted); font-size: .92rem; }
+.badge-pill { display: inline-block; font-size: .65rem; font-family: 'Reddit Sans Condensed',sans-serif; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; border: 1px solid rgba(0,0,0,.15); color: var(--muted); padding: .2rem .6rem; border-radius: 999px; margin-top: 1.25rem; }
+.integrations { padding: 6rem 0 5rem; background: var(--cream); position: relative; }
+.tools-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 2.5rem; }
+.tool-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; display: flex; align-items: flex-start; gap: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,.07), 0 1px 4px rgba(0,0,0,.04); }
+.tool-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.tool-name { font-weight: 600; font-size: .88rem; color: var(--text); margin-bottom: .3rem; }
+.tool-desc { font-size: .85rem; color: var(--muted); font-weight: 300; line-height: 1.5; }
+.crm-label { margin-top: 2.5rem; margin-bottom: 1rem; }
+.crm-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: .75rem; }
+.crm-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; align-items: center; gap: .5rem; font-size: .82rem; font-weight: 500; color: var(--text); box-shadow: 0 4px 20px rgba(0,0,0,.07), 0 1px 4px rgba(0,0,0,.04); }
+.crm-card span { font-size: 1.3rem; }
+.powered-bar { display: flex; justify-content: flex-end; align-items: center; gap: 1rem; margin-top: 2rem; font-size: .82rem; color: var(--muted); }
+.powered-pill { background: var(--dark); color: var(--white); font-size: .7rem; font-weight: 500; padding: .3rem .9rem; border-radius: 999px; white-space: nowrap; letter-spacing: .02em; }
+.plans { padding: 6rem 0; background: var(--cream); border-top: 1px solid var(--border); }
+.impl-banner { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,.07), 0 1px 4px rgba(0,0,0,.04); }
+.impl-left { display: flex; align-items: center; gap: 1rem; }
+.impl-icon { font-size: 1.5rem; width: 44px; height: 44px; background: var(--cream); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.impl-title { font-weight: 600; font-size: .95rem; color: var(--text); margin-bottom: .2rem; }
+.impl-desc { font-size: .82rem; color: var(--muted); font-weight: 300; }
+.impl-price { font-family: 'Unbounded',sans-serif; font-weight: 800; font-size: 1.8rem; color: var(--tc); white-space: nowrap; }
+.impl-price sub { font-family: 'Reddit Sans',sans-serif; font-size: .75rem; font-weight: 400; color: var(--muted); vertical-align: baseline; margin-left: 2px; }
+.plans-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+.plan-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; position: relative; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,.07), 0 1px 4px rgba(0,0,0,.04); }
+.plan-card.featured { background: var(--dark); border-color: var(--dark); color: var(--white); box-shadow: 0 8px 32px rgba(0,0,0,.25), 0 2px 8px rgba(0,0,0,.12); }
+.plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--tc); color: var(--white); font-size: .68rem; font-weight: 700; font-family: 'Reddit Sans Condensed',sans-serif; letter-spacing: .08em; text-transform: uppercase; padding: .2rem .85rem; border-radius: 999px; white-space: nowrap; }
+.plan-name { font-family: 'Unbounded',sans-serif; font-weight: 800; font-size: 1.1rem; margin-bottom: .35rem; }
+.plan-tagline { font-size: .8rem; font-weight: 300; opacity: .6; margin-bottom: 1.5rem; line-height: 1.4; }
+.plan-price { font-family: 'Unbounded',sans-serif; font-weight: 800; font-size: 2.4rem; color: var(--tc); line-height: 1; margin-bottom: .3rem; }
+.plan-period { font-size: .78rem; font-weight: 300; opacity: .55; margin-bottom: 1.75rem; }
+.plan-divider { height: 1px; background: var(--border); margin-bottom: 1.5rem; }
+.plan-card.featured .plan-divider { background: rgba(255,255,255,.1); }
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: .65rem; flex: 1; margin-bottom: 2rem; }
+.plan-features li { display: flex; align-items: flex-start; gap: .65rem; font-size: .92rem; font-weight: 300; line-height: 1.4; }
+.plan-features li::before { content: '✓'; color: var(--tc); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.plan-card.featured .plan-features li { color: rgba(255,255,255,.8); }
+.plan-btn { display: block; text-align: center; padding: .8rem; border-radius: 12px; font-size: .88rem; font-weight: 500; text-decoration: none; transition: all .2s; border: 1.5px solid; }
+.plan-btn-outline { border-color: var(--border); color: var(--text); background: transparent; }
+.plan-btn-outline:hover { border-color: var(--text); }
+.plan-btn-filled { border-color: var(--tc); background: var(--tc); color: var(--white); }
+.plan-btn-filled:hover { background: #a84f2e; border-color: #a84f2e; }
+.plan-btn-dark { border-color: rgba(255,255,255,.2); color: var(--white); background: rgba(255,255,255,.06); }
+.plan-btn-dark:hover { background: rgba(255,255,255,.12); }
+.plans-footnote { text-align: center; margin-top: 1.5rem; font-size: .85rem; color: var(--muted); }
+.plans-footnote a { color: var(--tc); text-decoration: none; }
+.proof { padding: 6rem 0; background: var(--dark); }
+.proof .section-title { color: var(--white); }
+.proof .section-title em { color: var(--tc); }
+.proof-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 3rem; }
+.proof-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.metric-card { background: var(--cream); border: 1px solid rgba(255,255,255,.06); border-radius: 14px; padding: 1.5rem; box-shadow: 0 8px 28px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.25); }
+
+.metric-num { font-family: 'Unbounded',sans-serif; font-weight: 800; font-size: 2rem; color: var(--tc); line-height: 1; margin-bottom: .4rem; }
+.metric-label { font-size: .88rem; color: var(--text); font-weight: 300; line-height: 1.4; }
+.metric-sub { font-size: .68rem; color: var(--muted); margin-top: .5rem; }
+.testimonial { background: var(--cream); border: 1px solid rgba(255,255,255,.06); border-radius: 20px; padding: 2rem; box-shadow: 0 8px 28px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.25); }
+.testimonial-quote { font-size: 1.2rem; color: var(--tc); margin-bottom: .5rem; font-weight: 700; line-height: 1; }
+.testimonial-body { font-size: 1rem; color: var(--text); font-weight: 300; line-height: 1.7; margin-bottom: 1.5rem; }
+.testimonial-author { display: flex; align-items: center; gap: .75rem; }
+.author-avatar { width: 38px; height: 38px; background: var(--tc); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem; color: var(--white); flex-shrink: 0; }
+.author-name { font-weight: 600; font-size: .88rem; color: var(--text); }
+.author-role { font-size: .78rem; color: var(--muted); }
+.wsw-tag { font-size: .68rem; color: var(--muted); margin-top: 1.25rem; font-weight: 300; }
+.cta { padding: 7rem 0; background: var(--cream); text-align: center; }
+.cta-label { margin-bottom: .75rem; }
+.cta-h2 { font-size: clamp(2rem,4vw,3rem); color: var(--text); margin-bottom: .15rem; }
+.cta-h2-tc { font-size: clamp(2rem,4vw,3rem); margin-bottom: 1.25rem; }
+.cta-desc { font-size: .95rem; color: var(--muted); font-weight: 300; max-width: 480px; margin: 0 auto 2.5rem; }
+.cta-btns { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.cta-wa { display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: var(--white); padding: .85rem 1.75rem; border-radius: 999px; font-size: .9rem; font-weight: 500; text-decoration: none; transition: background .2s; }
+.cta-wa:hover { background: #1dbd5a; }
+.cta-wa svg { width: 18px; height: 18px; fill: white; }
+.cta-contact { font-size: .8rem; color: var(--muted); }
+.cta-contact strong { color: var(--text); }
+footer { background: var(--dark); padding: 2rem 0; border-top: 1px solid rgba(255,255,255,.06); }
+.footer-inner { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.footer-copy { font-size: .78rem; color: rgba(255,255,255,.3); text-align: center; }
+.footer-links { display: flex; gap: 1.5rem; list-style: none; }
+.footer-links a { font-size: .78rem; color: rgba(255,255,255,.3); text-decoration: none; }
+.footer-links a:hover { color: rgba(255,255,255,.6); }
+.wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200; width: 50px; height: 50px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(37,211,102,.4); text-decoration: none; transition: transform .2s; }
+.wa-float:hover { transform: scale(1.08); }
+.wa-float svg { width: 24px; height: 24px; fill: white; }
+@media (max-width:900px) {
+  .hero-top { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-stats-inner { grid-template-columns: 1fr; }
+  .stat-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .stat-card:last-child { border-bottom: none; }
+  .problem-grid { grid-template-columns: 1fr 1fr; }
+  .problem-row-2 { max-width: 100%; }
+  .how-steps { grid-template-columns: 1fr; gap: 2.5rem; }
+  .compound-grid { grid-template-columns: 1fr 1fr; }
+  .tools-grid { grid-template-columns: 1fr 1fr; }
+  .crm-grid { grid-template-columns: repeat(2,1fr); }
+  .plans-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+  .proof-layout { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+@media (max-width:600px) {
+  .problem-grid { grid-template-columns: 1fr; }
+  .compound-grid { grid-template-columns: 1fr; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; align-items: flex-start; }
+  .impl-banner { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── HERO LAYOUT ── */
+.hero-left-col { }
+.hero-right-col { display: flex; align-items: center; justify-content: center; }
+@media (max-width:900px) {
+  .hero-left-col { }
+  .hero-right-col { justify-content: flex-start; }
+}
+
+/* ── CHAT MOCKUP ── */
+.chat-mockup { background: #1C1712; border-radius: 16px; width: 100%; max-width: 460px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+.chat-header { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,.07); }
+.chat-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--tc); display: flex; align-items: center; justify-content: center; font-size: .7rem; font-weight: 700; color: white; flex-shrink: 0; }
+.chat-header-info { flex: 1; }
+.chat-name { font-size: .82rem; font-weight: 600; color: rgba(255,255,255,.9); }
+.chat-sub { font-size: .7rem; color: rgba(255,255,255,.35); margin-top: 1px; }
+.chat-status { font-size: .7rem; color: rgba(255,255,255,.4); display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.chat-dot { width: 7px; height: 7px; border-radius: 50%; background: #34C87A; display: inline-block; }
+.chat-body { padding: 20px 16px; display: flex; flex-direction: column; gap: 14px; }
+.chat-row { display: flex; align-items: flex-start; gap: 10px; }
+.chat-bubble-avatar { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; margin-top: 2px; }
+.chat-bubble-avatar.inactive { background: rgba(255,255,255,.12); }
+.chat-bubble-avatar.active { background: var(--tc); }
+.chat-bubble { font-size: .78rem; line-height: 1.55; border-radius: 10px; padding: 8px 12px; max-width: calc(100% - 40px); }
+.chat-bubble.cmd { background: rgba(196,97,58,.18); border: 1px solid rgba(196,97,58,.3); color: var(--tc); font-family: monospace; font-size: .8rem; }
+.chat-bubble-sub { font-family: 'Reddit Sans', sans-serif; font-size: .7rem; color: rgba(255,255,255,.35); margin-top: 3px; }
+.chat-bubble.reply { background: rgba(255,255,255,.07); color: rgba(255,255,255,.85); font-weight: 500; }
+.chat-bubble.typing { background: rgba(255,255,255,.07); display: flex; align-items: center; gap: 5px; padding: 12px 16px; }
+.chat-bubble.typing span { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.4); animation: bounce 1.2s infinite; }
+.chat-bubble.typing span:nth-child(2) { animation-delay: .2s; }
+.chat-bubble.typing span:nth-child(3) { animation-delay: .4s; }
+@keyframes bounce { 0%,80%,100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <svg class="logo-mark" viewBox="0 0 60 60" fill="none">
+        <path d="M 30 4 A 26 26 0 1 0 56 30" stroke="#18181B" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M 30 13 A 17 17 0 1 0 47 30" stroke="#18181B" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M 30 22 A 8 8 0 1 0 38 30" stroke="#D46241" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="30" cy="30" r="3" fill="#D46241"/>
+      </svg>
+      <span class="logo-word">Orienta</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#problema">El problema</a></li>
+      <li><a href="#sistema">Cómo funciona</a></li>
+      <li><a href="#sistema">El sistema</a></li>
+      <li><a href="#planes">Planes</a></li>
+      <li><a href="#resultados">Resultados</a></li>
+    </ul>
+    <a href="https://wa.me/573156434474" class="btn-cta">&#x1F4AC; Habla con nosotros &rarr;</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-left-col">
+      <div class="hero-badge">Disponible ahora en LATAM</div>
+      <h1 class="headline hero-h1">Tu agencia,<br>con <em>superpoderes</em><br>de IA.</h1>
+      <p class="hero-desc">Implementamos un sistema de inteligencia artificial completo para agencias de educaci&oacute;n internacional: m&aacute;s cierres, seguimientos autom&aacute;ticos y horas de trabajo manual eliminadas.</p>
+      <div class="hero-btns">
+        <a href="#planes" class="btn-primary">Ver planes y precios &rarr;</a>
+        <a href="#sistema" class="btn-ghost">C&oacute;mo funciona &darr;</a>
+      </div>
+    </div>
+    <div class="hero-right-col">
+      <div class="chat-mockup">
+        <div class="chat-header">
+          <div class="chat-avatar">OA</div>
+          <div class="chat-header-info">
+            <div class="chat-name">Sales Copilot &mdash; WSW</div>
+            <div class="chat-sub">Agente IA activo</div>
+          </div>
+          <div class="chat-status"><span class="chat-dot"></span> En l&iacute;nea</div>
+        </div>
+        <div class="chat-body">
+          <div class="chat-row">
+            <div class="chat-bubble-avatar inactive"></div>
+            <div class="chat-bubble cmd">/prep-asesoria<div class="chat-bubble-sub">Santiago R. &middot; 3:00 PM hoy</div></div>
+          </div>
+          <div class="chat-row">
+            <div class="chat-bubble-avatar active"></div>
+            <div class="chat-bubble reply">
+              Brief listo &#x2713;<br>
+              <span style="opacity:.75">Inter&eacute;s: Maestr&iacute;a Canad&aacute; &#x1F1E8;&#x1F1E6;</span><br>
+              <span style="opacity:.75">Objeci&oacute;n: costo total</span><br>
+              <span style="opacity:.75">Tip: Eval&uacute;a UK &mdash; usa A.E.R.</span><br>
+              <span style="opacity:.75">Beca ICETEX potencial &#x1F3AF;</span>
+            </div>
+          </div>
+          <div class="chat-row">
+            <div class="chat-bubble-avatar inactive"></div>
+            <div class="chat-bubble cmd">/pipeline</div>
+          </div>
+          <div class="chat-row">
+            <div class="chat-bubble-avatar active"></div>
+            <div class="chat-bubble typing"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stats-inner">
+      <div class="stat-card">
+        <span class="stat-icon">&#x1F680;</span>
+        <div class="stat-num">2&times;</div>
+        <div class="stat-label">M&aacute;s leads cerrados<br>el primer mes</div>
+        <div class="stat-sub">VS. MES ANTERIOR</div>
+        <div class="stat-bar"></div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">&#x1F4C8;</span>
+        <div class="stat-num">68%</div>
+        <div class="stat-label">Tasa de cierre<br>con el sistema</div>
+        <div class="stat-sub">ANTES: 31%</div>
+        <div class="stat-bar"></div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">&#x23F1;&#xFE0F;</span>
+        <div class="stat-num">5h</div>
+        <div class="stat-label">Trabajo manual ahorrado<br>por asesor / semana</div>
+        <div class="stat-sub">POR ASESOR / SEMANA</div>
+        <div class="stat-bar"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="problem" id="problema">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="label">El diagn&oacute;stico</span>
+      <h2 class="headline section-title">Tu agencia tiene el talento.<br><em>El proceso la est&aacute; frenando.</em></h2>
+      <p class="section-sub">Identificamos los 5 puntos cr&iacute;ticos donde las agencias pierden leads, tiempo y dinero todos los d&iacute;as.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="card">
+        <span class="card-icon">&#x1F4DE;</span>
+        <div class="card-title">Asesor&iacute;as solo informativas</div>
+        <p class="card-desc">Sin brief previo, la conversaci&oacute;n se llena de datos y pierde emoci&oacute;n. El lead no cierra porque no se siente orientado.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">&#x1F9CA;</span>
+        <div class="card-title">Leads que se enfrían</div>
+        <p class="card-desc">El seguimiento se reduce a "&iquest;pudiste revisar?". Sin urgencia ni nutrici&oacute;n, el inter&eacute;s desaparece en silencio.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">&#x23F1;&#xFE0F;</span>
+        <div class="card-title">Cotizaciones lentas y manuales</div>
+        <p class="card-desc">Buscar precios, armar propuestas, actualizar el CRM: horas de trabajo que deber&iacute;an tomar minutos.</p>
+      </div>
+    </div>
+    <div class="problem-row-2">
+      <div class="card">
+        <span class="card-icon">&#x1F4CA;</span>
+        <div class="card-title">Pipeline sin visibilidad</div>
+        <p class="card-desc">Nadie sabe qu&eacute; leads est&aacute;n en riesgo hoy. Las alertas llegan tarde o nunca llegan.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">&#x1F504;</span>
+        <div class="card-title">CRM siempre desactualizado</div>
+        <p class="card-desc">El CRM refleja la realidad de hace dos semanas. Actualizar etapas es una tarea m&aacute;s que nadie prioriza.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="sistema">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="label" style="color:rgba(196,97,58,.9)">El sistema</span>
+      <h2 class="headline section-title">Un agente de IA que trabaja<br><em>contigo y por ti.</em></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.5);max-width:540px">No es un chatbot. Es un Sales Copilot conectado a todas tus herramientas, con metodolog&iacute;a de ventas integrada y comandos que activan procesos completos en segundos.</p>
+    </div>
+    <div class="how-steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Auditamos tu proceso actual</div>
+        <p class="step-desc">Mapeamos tu pipeline, CRM, herramientas y puntos de fuga. Identificamos exactamente d&oacute;nde se pierden leads y tiempo.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Construimos tu plugin a medida</div>
+        <p class="step-desc">Dise&ntilde;amos tu Sales Copilot: conectado a tu CRM, Gmail, Calendar y Drive, con tu metodolog&iacute;a de ventas integrada.</p>
+        <div class="step-tags">
+          <span class="tag">/prep-asesoria</span>
+          <span class="tag">/debrief</span>
+          <span class="tag">/pipeline</span>
+          <span class="tag">/viernes</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Capacitamos y optimizamos</div>
+        <p class="step-desc">Tu equipo aprende en 2 sesiones. Medimos resultados y afinamos el sistema cada mes en retenci&oacute;n.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="compound">
+  <div class="wrap">
+    <div class="section-header" style="margin-top:4rem">
+      <span class="label" style="color:rgba(196,97,58,.9)">Lo que construyes con el tiempo</span>
+      <h2 class="headline section-title" style="color:white">Tu agencia, <em>m&aacute;s inteligente</em><br>cada mes.</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.45)">El sistema no es un punto de llegada. Es una ventaja que se acumula mes a mes con cada optimizaci&oacute;n.</p>
+    </div>
+    <div class="compound-grid">
+      <div class="compound-card">
+        <span class="card-icon">&#x1F3AF;</span>
+        <div class="card-title">El mismo criterio, en todo el equipo</div>
+        <p class="card-desc">El asesor que m&aacute;s convierte tiene una forma de prepararse, de leer al lead, de manejar objeciones. El sistema aplica ese mismo criterio en cada asesor&iacute;a &mdash; sin importar qui&eacute;n la haga.</p>
+        <div class="badge-pill">Desde el d&iacute;a 1</div>
+      </div>
+      <div class="compound-card">
+        <span class="card-icon">&#x1F4CA;</span>
+        <div class="card-title">Mejora continua real</div>
+        <p class="card-desc">Cada revisi&oacute;n mensual analiza qu&eacute; argumentos cerraron m&aacute;s, qu&eacute; objeciones aparecen, qu&eacute; etapas se traban. Ese aprendizaje se incorpora al sistema. El mes siguiente, todos venden con lo que funcion&oacute; este mes.</p>
+        <div class="badge-pill">Con cada retenci&oacute;n</div>
+      </div>
+      <div class="compound-card">
+        <span class="card-icon">&#x26A1;</span>
+        <div class="card-title">Tu equipo vende mejor, no trabaja m&aacute;s</div>
+        <p class="card-desc">No se trata de reemplazar al asesor &mdash; se trata de potenciar su conocimiento comercial. El junior entra a cada llamada con el mismo nivel de preparaci&oacute;n que el senior m&aacute;s experimentado.</p>
+        <div class="badge-pill">El efecto compuesto</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="integrations" id="integraciones">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="label">Integraciones</span>
+      <h2 class="headline section-title">Tu Sales Copilot conectado<br><em>a todo lo que ya usas</em></h2>
+      <p class="section-sub">Sin reemplazar tus herramientas. Sin fricci&oacute;n. Solo conexi&oacute;n.</p>
+    </div>
+    <span class="label" style="display:block;margin-bottom:1rem">Herramientas esenciales</span>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-icon" style="background:#FEF0EE">
+          <!-- Gmail -->
+          <svg width="22" height="22" viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L12 9.548l8.073-6.055C21.69 2.28 24 3.434 24 5.457z" fill="#EA4335"/></svg>
+        </div>
+        <div><div class="tool-name">Gmail</div><div class="tool-desc">Revisa correos, redacta seguimientos personalizados y prioriza respuestas pendientes</div></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background:#EEF4FF">
+          <!-- Google Calendar -->
+          <svg width="22" height="22" viewBox="0 0 24 24"><rect x="1" y="3" width="22" height="20" rx="2" fill="white" stroke="#E0E0E0" stroke-width="1.2"/><rect x="1" y="3" width="22" height="6" rx="2" fill="#1A73E8"/><rect x="1" y="7" width="22" height="2" fill="#1A73E8"/><rect x="6" y="1" width="2" height="4" rx="1" fill="#1A73E8"/><rect x="16" y="1" width="2" height="4" rx="1" fill="#1A73E8"/><text x="12" y="18" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="7" fill="#1A73E8">17</text></svg>
+        </div>
+        <div><div class="tool-name">Google Calendar</div><div class="tool-desc">Lee asesor&iacute;as programadas, extrae datos del lead y detecta pr&oacute;ximas reuniones autom&aacute;ticamente</div></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background:#EEF4FF">
+          <!-- Google Drive -->
+          <svg width="22" height="22" viewBox="0 0 24 24"><path d="M4.433 21l4-6.928H22l-4 6.928H4.433z" fill="#0F9D58"/><path d="M2 21l6-10.392L12 17.32 8 21H2z" fill="#4285F4" opacity=".01"/><path d="M8.567 3L2 14.07 5.567 20.5 12 9.5 8.567 3z" fill="#4285F4"/><path d="M15.433 3L22 14.07l-3.567 6.43L12 9.5 15.433 3z" fill="#FBBC04"/><path d="M8.567 3h6.866L22 14.07H2L8.567 3z" fill="#EA4335" opacity=".6"/></svg>
+        </div>
+        <div><div class="tool-name">Google Drive</div><div class="tool-desc">Accede a biblioteca de contenido por destino para nutrir leads con materiales relevantes</div></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background:#F0FBF4">
+          <!-- Google Sheets -->
+          <svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="1" width="18" height="22" rx="2" fill="#0F9D58"/><rect x="6" y="7" width="12" height="1.5" rx=".75" fill="white" opacity=".9"/><rect x="6" y="10.5" width="12" height="1.5" rx=".75" fill="white" opacity=".9"/><rect x="6" y="14" width="8" height="1.5" rx=".75" fill="white" opacity=".9"/><rect x="6" y="17.5" width="10" height="1.5" rx=".75" fill="white" opacity=".6"/><path d="M15 1v5h5" fill="none" stroke="white" stroke-width="1" opacity=".5"/><path d="M15 1l5 5h-5V1z" fill="rgba(0,0,0,.15)"/></svg>
+        </div>
+        <div><div class="tool-name">Google Sheets</div><div class="tool-desc">Registra m&eacute;tricas, historial de leads y reportes de pipeline en tiempo real</div></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background:#F5F5F5">
+          <!-- Archivos locales -->
+          <svg width="22" height="22" viewBox="0 0 24 24"><path d="M3 3h8l2 2h8v14a2 2 0 01-2 2H3a2 2 0 01-2-2V5a2 2 0 012-2z" fill="#78909C"/><path d="M3 3h8l2 2H3V3z" fill="#546E7A"/><rect x="5" y="10" width="10" height="1.2" rx=".6" fill="white" opacity=".8"/><rect x="5" y="13" width="8" height="1.2" rx=".6" fill="white" opacity=".8"/><rect x="5" y="16" width="6" height="1.2" rx=".6" fill="white" opacity=".6"/></svg>
+        </div>
+        <div><div class="tool-name">Archivos locales</div><div class="tool-desc">Cotizaciones, propuestas y documentos de la agencia disponibles como contexto para el agente</div></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background:#EEF4FF">
+          <!-- Google Docs -->
+          <svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="1" width="18" height="22" rx="2" fill="#4285F4"/><rect x="6" y="7" width="12" height="1.5" rx=".75" fill="white" opacity=".9"/><rect x="6" y="10.5" width="12" height="1.5" rx=".75" fill="white" opacity=".9"/><rect x="6" y="14" width="8" height="1.5" rx=".75" fill="white" opacity=".9"/><rect x="6" y="17.5" width="10" height="1.5" rx=".75" fill="white" opacity=".6"/><path d="M15 1l5 5h-5V1z" fill="rgba(0,0,0,.15)"/></svg>
+        </div>
+        <div><div class="tool-name">Google Docs</div><div class="tool-desc">El agente lee y genera propuestas, debriefs y documentos de seguimiento directamente en tus carpetas</div></div>
+      </div>
+    </div>
+    <span class="label crm-label" style="display:block;margin-top:2.5rem;margin-bottom:1rem">Tu CRM &mdash; o sin CRM</span>
+    <div class="crm-grid">
+      <div class="crm-card">
+        <svg width="28" height="28" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#FF7A59"/><circle cx="20" cy="12" r="3.5" fill="white"/><path d="M20 15.5v4" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M11 20l6-6" stroke="white" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="21" r="2" fill="white"/></svg>
+        HubSpot
+      </div>
+      <div class="crm-card">
+        <svg width="28" height="28" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#00B67A"/><text x="16" y="21" text-anchor="middle" font-family="Arial Black" font-weight="900" font-size="14" fill="white">C</text></svg>
+        Clientify
+      </div>
+      <div class="crm-card">
+        <svg width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#E42527"/><text x="16" y="22" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="10" fill="white">ZOHO</text></svg>
+        Zoho CRM
+      </div>
+      <div class="crm-card">
+        <svg width="28" height="28" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#22414B"/><circle cx="16" cy="13" r="5" fill="#25C16F"/><rect x="13.5" y="17" width="5" height="8" rx="2.5" fill="#25C16F"/></svg>
+        Pipedrive
+      </div>
+      <div class="crm-card">
+        <svg width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#191919"/><path d="M9 8.5h10l4.5 4.5V24H9V8.5z" fill="white"/><path d="M19 8.5V13h4.5" fill="none" stroke="#191919" stroke-width="1.5"/><path d="M12 15h8M12 18h6M12 21h4" stroke="#888" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Notion
+      </div>
+      <div class="crm-card">
+        <svg width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#FCB400"/><rect x="6" y="7" width="20" height="6" rx="2" fill="white"/><rect x="6" y="15" width="9" height="10" rx="2" fill="white"/><rect x="17" y="15" width="9" height="10" rx="2" fill="rgba(255,255,255,0.55)"/></svg>
+        Airtable
+      </div>
+      <div class="crm-card">
+        <svg width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#1D6F42"/><path d="M9 10h14v12H9z" fill="none" stroke="white" stroke-width="1.2"/><path d="M9 14.5h14M9 19h14M16 10v12" stroke="white" stroke-width="1.2"/></svg>
+        Excel / Sheets
+      </div>
+      <div class="crm-card">
+        <svg width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#0F5FBF"/><path d="M7 22L12 11l4.5 9 3-5.5L24 22" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        LeadSquared
+      </div>
+    </div>
+    <p style="text-align:center;font-size:.88rem;color:var(--muted);margin-top:1.5rem">&iquest;Usas otra herramienta? Lo evaluamos juntos.</p>
+    <div class="powered-bar">
+      <span class="powered-pill">Powered by Claude API</span>
+    </div>
+  </div>
+</section>
+
+<section class="plans" id="planes">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="label">Planes todo incluido</span>
+      <h2 class="headline section-title">Un precio mensual.<br><em>Sin sorpresas.</em></h2>
+      <p class="section-sub">Usuarios de Claude, sistema personalizado, soporte y optimizaci&oacute;n mensual &mdash; sin costos ocultos ni facturas separadas.</p>
+    </div>
+    <div class="impl-banner">
+      <div class="impl-left">
+        <div class="impl-icon">&#x1F6E0;</div>
+        <div>
+          <div class="impl-title">Fee de implementaci&oacute;n &mdash; pago &uacute;nico</div>
+          <div class="impl-desc">Auditor&iacute;a de tu proceso, configuraci&oacute;n completa del sistema y capacitaci&oacute;n inicial del equipo. Se paga una sola vez al inicio.</div>
+        </div>
+      </div>
+      <div class="impl-price">$300 <sub>USD</sub></div>
+    </div>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <div class="plan-name">Starter</div>
+        <div class="plan-tagline">Para agencias que quieren comenzar sin complejidad.</div>
+        <div class="plan-price">$280</div>
+        <div class="plan-period">USD / mes &middot; hasta 3 usuarios</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Usuarios de Claude incluidos</li>
+          <li>Agente de ventas configurado a tu medida</li>
+          <li>Google Calendar + Gmail + Drive</li>
+          <li>2 comandos personalizados</li>
+          <li>Soporte y updates mensuales</li>
+        </ul>
+        <a href="https://wa.me/573156434474" class="plan-btn plan-btn-outline">Comenzar &rarr;</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-badge">M&aacute;s popular</div>
+        <div class="plan-name" style="color:white">Pro</div>
+        <div class="plan-tagline">El sistema completo para agencias con pipeline activo.</div>
+        <div class="plan-price">$420</div>
+        <div class="plan-period">USD / mes &middot; hasta 5 usuarios</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo lo de Starter</li>
+          <li>CRM + Google Drive integrados</li>
+          <li>4 comandos personalizados</li>
+          <li>Documentaci&oacute;n sistema de ventas</li>
+          <li>2h de optimizaci&oacute;n mensual</li>
+          <li>Reporte mensual de uso</li>
+        </ul>
+        <a href="https://wa.me/573156434474" class="plan-btn plan-btn-filled">Comenzar &rarr;</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Full</div>
+        <div class="plan-tagline">El ecosistema IA completo para tu agencia.</div>
+        <div class="plan-price">$650</div>
+        <div class="plan-period">USD / mes &middot; hasta 8 usuarios</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo lo de Pro</li>
+          <li>Cotizador con b&uacute;squeda en vivo</li>
+          <li>Biblioteca de contenido por destino</li>
+          <li>Metodolog&iacute;a A.E.R. de objeciones</li>
+          <li>Sesi&oacute;n estrat&eacute;gica mensual</li>
+          <li>Nuevas funciones prioritarias</li>
+        </ul>
+        <a href="https://wa.me/573156434474" class="plan-btn plan-btn-outline">Comenzar &rarr;</a>
+      </div>
+    </div>
+    <p class="plans-footnote">&iquest;Necesitas m&aacute;s usuarios o una configuraci&oacute;n especial? <a href="https://wa.me/573156434474">Hablemos &rarr;</a></p>
+  </div>
+</section>
+
+<section class="proof" id="resultados">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="label" style="color:rgba(196,97,58,.9)">Resultados reales</span>
+      <h2 class="headline section-title">Construido y probado<br>en <em>una agencia real.</em></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.45)">We Study World (WSW), agencia colombiana operando en 10 destinos. N&uacute;meros reales, sin proyecciones.</p>
+    </div>
+    <div class="proof-layout">
+      <div class="proof-metrics">
+        <div class="metric-card"><div class="metric-num">2&times;</div><div class="metric-label">Leads cerrados el primer mes</div></div>
+        <div class="metric-card"><div class="metric-num">68%</div><div class="metric-label">Tasa de cierre</div><div class="metric-sub">vs. 31% pre-IA</div></div>
+        <div class="metric-card"><div class="metric-num">5h</div><div class="metric-label">Trabajo manual ahorrado por asesor / semana</div></div>
+        <div class="metric-card"><div class="metric-num">30s</div><div class="metric-label">Para brief completo de cualquier lead</div></div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">&ldquo;</div>
+        <p class="testimonial-body">Antes de cada asesor&iacute;a improvisaba. Ahora entro con un brief completo del lead, sus objeciones probables y el &aacute;ngulo exacto para cerrar. Es como tener un asistente senior que nunca olvida nada.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MW</div>
+          <div>
+            <div class="author-name">Mike &mdash; We Study World</div>
+            <div class="author-role">Fundador &middot; Bogot&aacute;, Colombia</div>
+          </div>
+        </div>
+        <div class="wsw-tag">We Study World opera en 10 destinos internacionales desde Colombia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <span class="label cta-label">&iquest;Lista tu agencia?</span>
+    <h2 class="headline cta-h2">La ventana de oportunidad</h2>
+    <h2 class="headline cta-h2-tc accent">es ahora.</h2>
+    <p class="cta-desc">En 12&ndash;18 meses, esto ser&aacute; est&aacute;ndar. Las agencias que implementen primero tendr&aacute;n la ventaja.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/573156434474" class="cta-wa">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Escr&iacute;benos por WhatsApp
+      </a>
+      <a href="#planes" class="btn-ghost">Ver planes &uarr;</a>
+    </div>
+    <p class="cta-contact"><strong>+57 315 643 4474</strong> &nbsp;&middot;&nbsp; Respuesta en menos de 24h</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+        <path d="M 30 4 A 26 26 0 1 0 56 30" stroke="#F5F4EF" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M 30 13 A 17 17 0 1 0 47 30" stroke="#F5F4EF" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M 30 22 A 8 8 0 1 0 38 30" stroke="#D46241" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="30" cy="30" r="3" fill="#D46241"/>
+      </svg>
+      <strong style="color:rgba(255,255,255,.7);font-family:'Geom',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:0.04em">Orienta</strong>
+    </div>
+    <div class="footer-copy">&copy; 2026 Orienta &mdash; Bogot&aacute;, Colombia</div>
+    <ul class="footer-links">
+      <li><a href="#">Privacidad</a></li>
+      <li><a href="#">T&eacute;rminos</a></li>
+      <li><a href="mailto:hola@orienta.ai">hola@orienta.ai</a></li>
+    </ul>
+  </div>
+</footer>
+
+<a href="https://wa.me/573156434474" class="wa-float" title="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+</body>
+</html>
